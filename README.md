@@ -1,6 +1,22 @@
 ## Getting Started
 
-First, create a .env.local file using .env.example as a template.
+Follow these steps to set up the project locally:
+
+**Install dependencies**
+
+```bash
+npm install
+```
+
+**Create environment variables**
+
+Copy the `.env.example` file to `.env.local` and update the values as needed:
+
+or
+
+`cp .env.example .env.lcoal`
+
+**Run the development server**
 
 Then start the development server with one of the following commands:
 
