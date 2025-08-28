@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ThreadList } from "./thread-list";
-import { Avatar } from "@shopify/polaris";
+import { ActionList, Avatar, Popover } from "@shopify/polaris";
 import {
   ComposeIcon,
   LayoutSidebarLeftIcon,
@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useShopInfo } from "../../hooks";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useIsScrolled } from "@/app/hooks/use-is-scrolled";
+import { useUser } from "@auth0/nextjs-auth0";
 interface TThread {
   id: string;
   title?: string;
@@ -49,10 +50,22 @@ function useStopHomeIconFlicker(
 
 export function SidePanel({ threads }: SidePanelProps) {
   const shopInfo = useShopInfo();
+  const [popoverActive, setPopoverActive] = useState(false);
 
   const sidebarRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const isScrolled = useIsScrolled(sidebarRef.current);
+  const { user } = useUser();
+
+  const activator = (
+    <div
+      className="h-full rounded-lg py-[6px] pl-[8px] pr-[10px] hover:bg-[#0000000a] flex items-center gap-2"
+      onClick={() => setPopoverActive(true)}
+    >
+      <Avatar name={user?.name} source={user?.picture} />
+      <div>{user?.name}</div>
+    </div>
+  );
 
   // TODO: These 2 are hacky ways to stop home icon flickering when collapsing
   // Might need further investigation on improving this(250821, sh)
@@ -139,10 +152,24 @@ export function SidePanel({ threads }: SidePanelProps) {
           {shopInfo?.name && (
             <div className="sticky bottom-0 z-30 py-1.5 bg-[#f9f9f9] min-h-[60px]">
               <div className="h-full w-full px-[6px]">
-                <div className="h-full rounded-lg py-[6px] pl-[8px] pr-[10px] hover:bg-[#0000000a] flex items-center gap-2">
-                  <Avatar name={shopInfo.name} />
-                  <div>{shopInfo.name}</div>
-                </div>
+                <Popover
+                  active={popoverActive}
+                  activator={activator}
+                  autofocusTarget="first-node"
+                  preferredPosition="above"
+                  onClose={() => setPopoverActive(false)}
+                >
+                  <ActionList
+                    actionRole="menuitem"
+                    items={[
+                      {
+                        content: "Logout",
+                        // icon: EditIcon,
+                        url: "/auth/logout",
+                      },
+                    ]}
+                  />
+                </Popover>
               </div>
             </div>
           )}
@@ -156,40 +183,80 @@ export function SidePanel({ threads }: SidePanelProps) {
 
 function SideBarTinyBar({ onOpenSidebar }: { onOpenSidebar?: () => void }) {
   const [hovering, setHovering] = useState(false);
-  const searchParams = useSearchParams();
-  const session_id = searchParams.get("session_id");
+  const { user } = useUser();
+  const [popoverActive, setPopoverActive] = useState(false);
+  const activator = (
+    <div
+      className="rounded-lg hover:bg-[#0000000a] flex items-center cursor-pointer"
+      onClick={(e) => {
+        e.stopPropagation();
+        setPopoverActive(true);
+      }}
+    >
+      <Avatar name={user?.name} source={user?.picture} size="lg" />
+    </div>
+  );
 
   return (
     <div
-      className="h-full flex flex-col cursor-e-resize"
+      className="h-full flex flex-col cursor-e-resize justify-between"
       onClick={onOpenSidebar}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
-      <div className="w-full flex justify-between items-center min-h-[52px] px-2">
-        <div
-          onClick={onOpenSidebar}
-          className="h-[36px] w-[36px] flex items-center justify-center hover:bg-[#00000012] rounded-lg cursor-e-resize"
-        >
-          {hovering ? (
-            <LayoutSidebarLeftIcon width={24} height={24} />
-          ) : (
-            <HomeIcon width={24} height={24} />
-          )}
+      <div>
+        <div className="w-full flex justify-between items-center min-h-[52px] px-2">
+          <div
+            onClick={onOpenSidebar}
+            className="h-[36px] w-[36px] flex items-center justify-center hover:bg-[#00000012] rounded-lg cursor-e-resize"
+          >
+            {hovering ? (
+              <LayoutSidebarLeftIcon width={24} height={24} />
+            ) : (
+              <HomeIcon width={24} height={24} />
+            )}
+          </div>
+        </div>
+
+        {/* New CHAT */}
+        <div className="mt-2">
+          <Link
+            href={`/threads`}
+            className="max-w-[40px] mx-[6px] flex items-center gap-1.5 min-h-[36px] py-[6px] px-[10px] text-[#0d0d0d] hover:bg-[#0000000a] rounded-lg cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <div className="min-w-[24px] min-h-[24px]">
+              <ComposeIcon width={24} height={24} />
+            </div>
+          </Link>
         </div>
       </div>
 
-      {/* New CHAT */}
-      <div className="mt-2">
-        <Link
-          href={`/threads`}
-          className="max-w-[40px] mx-[6px] flex items-center gap-1.5 min-h-[36px] py-[6px] px-[10px] text-[#0d0d0d] hover:bg-[#0000000a] rounded-lg cursor-pointer"
-        >
-          <div className="min-w-[24px] min-h-[24px]">
-            <ComposeIcon width={24} height={24} />
+      {user?.name && (
+        <div className="sticky bottom-0 z-30 py-1.5 bg-[#f9f9f9] min-h-[60px]">
+          <div className="h-full w-full px-[6px]">
+            <Popover
+              active={popoverActive}
+              activator={activator}
+              autofocusTarget="first-node"
+              preferredPosition="above"
+              onClose={() => setPopoverActive(false)}
+            >
+              <ActionList
+                actionRole="menuitem"
+                items={[
+                  {
+                    content: "Logout",
+                    url: "/auth/logout",
+                  },
+                ]}
+              />
+            </Popover>
           </div>
-        </Link>
-      </div>
+        </div>
+      )}
     </div>
   );
 }
