@@ -3,15 +3,12 @@
 import { cn } from "@heroui/react";
 import { Icon, Spinner, Text } from "@shopify/polaris";
 import { AlertTriangleIcon, ArrowRightIcon } from "@shopify/polaris-icons";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 
 export function NoPhoneNumberSetAlert() {
-  const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
-
-  // TODO: In Remix when there's navigation we set it to true
-  const isMovingToSettings = false;
 
   return (
     <div
@@ -20,7 +17,11 @@ export function NoPhoneNumberSetAlert() {
         "relative",
         "cursor-pointer"
       )}
-      onClick={() => router.push(`/threads/settings`)}
+      onClick={() => {
+        startTransition(() => {
+          router.push(`/settings`);
+        });
+      }}
     >
       <div className="w-full flex justify-center gap-2 p-2">
         <div>
@@ -30,7 +31,7 @@ export function NoPhoneNumberSetAlert() {
           Call or Text Gena Set-Up Required
         </Text>
         <div>
-          {isMovingToSettings ? (
+          {isPending ? (
             <Spinner size="small" />
           ) : (
             <Icon source={ArrowRightIcon} />

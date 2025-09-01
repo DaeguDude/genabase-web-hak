@@ -255,8 +255,8 @@ export default function SettingsPage() {
                 </>
               ) : (
                 <Text as="p" tone="critical">
-                  please enter to be able to call or text your personal AI
-                  agent.
+                  please enter your phone number to call or text your personal
+                  AI agent.
                 </Text>
               )}
             </BlockStack>
