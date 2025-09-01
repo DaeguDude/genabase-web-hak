@@ -7,11 +7,13 @@ import {
   ComposeIcon,
   LayoutSidebarLeftIcon,
   HomeIcon,
+  SettingsFilledIcon,
+  ExitIcon,
 } from "@shopify/polaris-icons";
 import { cn } from "@heroui/react";
 import Link from "next/link";
 import { useShopInfo } from "../../hooks";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useIsScrolled } from "@/app/hooks/use-is-scrolled";
 import { useUser } from "@auth0/nextjs-auth0";
 interface TThread {
@@ -164,8 +166,13 @@ export function SidePanel({ threads }: SidePanelProps) {
                     items={[
                       {
                         content: "Logout",
-                        // icon: EditIcon,
+                        icon: ExitIcon,
                         url: "/auth/logout",
+                      },
+                      {
+                        content: "Settings",
+                        icon: SettingsFilledIcon,
+                        url: "/settings",
                       },
                     ]}
                   />
@@ -249,7 +256,13 @@ function SideBarTinyBar({ onOpenSidebar }: { onOpenSidebar?: () => void }) {
                 items={[
                   {
                     content: "Logout",
+                    icon: ExitIcon,
                     url: "/auth/logout",
+                  },
+                  {
+                    content: "Settings",
+                    icon: SettingsFilledIcon,
+                    url: "/settings",
                   },
                 ]}
               />

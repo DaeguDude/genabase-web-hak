@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SidePanel } from "./components";
-import { dummyThreads } from "./constants";
-import { AppProvider } from "@shopify/polaris";
-import { cookies } from "next/headers";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Providers from "./providers";
+import "@shopify/polaris/build/esm/styles.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
