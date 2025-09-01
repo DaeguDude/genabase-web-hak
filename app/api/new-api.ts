@@ -1,4 +1,4 @@
-import { TThread } from "../type";
+import { TShop, TThread } from "../type";
 import { deleteRequest, get, post } from "./http-methods";
 
 export async function getThreads({
@@ -46,6 +46,28 @@ export async function createThread(
   return post({
     url_path: `/threads`,
     body_obj: { thread_id, title: thread_name },
+    session_id: session_id,
+  });
+}
+
+export async function getShopInfo(session_id: string): Promise<TShop> {
+  return get({ url_path: "/shop/info", session_id: session_id });
+}
+
+export async function updatePhoneNumber(
+  phone_number: string,
+  session_id: string
+) {
+  return post({
+    url_path: `/shop/info/phone_number`,
+    body_obj: { phone_number },
+    session_id: session_id,
+  });
+}
+
+export async function deletePhoneNumber(session_id: string) {
+  return deleteRequest({
+    url_path: `/shop/info/phone_number`,
     session_id: session_id,
   });
 }

@@ -11,9 +11,10 @@ import {
 import { cn } from "@heroui/react";
 import Link from "next/link";
 import { useShopInfo } from "../../hooks";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useIsScrolled } from "@/app/hooks/use-is-scrolled";
 import { useUser } from "@auth0/nextjs-auth0";
+import { Settings } from "lucide-react";
 interface TThread {
   id: string;
   title?: string;
@@ -140,6 +141,17 @@ export function SidePanel({ threads }: SidePanelProps) {
               >
                 <div>
                   <ComposeIcon width={24} height={24} />
+                </div>
+                <div>New Chat</div>
+              </Link>
+            </div>
+            <div className="px-[6px]">
+              <Link
+                href={`/settings`}
+                className="flex items-center gap-1.5 min-h-[36px] py-[6px] px-[10px] text-[#0d0d0d] hover:bg-[#0000000a] rounded-lg cursor-pointer"
+              >
+                <div>
+                  <Settings width={24} height={24} />
                 </div>
                 <div>New Chat</div>
               </Link>
