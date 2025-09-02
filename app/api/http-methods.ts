@@ -21,7 +21,9 @@ export async function get({
   // Add other parameters if provided
   if (params_obj) {
     Object.keys(params_obj).forEach((key) => {
+      // @ts-expect-error Temporary
       if (params_obj[key] !== undefined && params_obj[key] !== null) {
+        // @ts-expect-error Temporary
         urlObj.searchParams.set(key, params_obj[key]);
       }
     });

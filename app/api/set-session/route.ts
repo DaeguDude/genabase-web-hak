@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const data = await response.json();
+    // const data = await response.json();
 
     // 2️⃣ Set cookie on server
     const xxResponse = NextResponse.json({

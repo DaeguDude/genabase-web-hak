@@ -1,5 +1,4 @@
 "use client";
-import { AppProvider } from "@shopify/polaris";
 import { SidePanel } from "../components";
 
 import { Header } from "../new-components";

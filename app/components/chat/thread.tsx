@@ -43,7 +43,7 @@ export function Thread({ thread }: { thread: TThread }) {
     >
       <Button
         // STUPID TYPE DESIGN: https://github.com/Shopify/polaris/issues/11234#issuecomment-1873497154
-        // @ts-ignore
+        // @ts-expect-error temporary
         onClick={(e: React.MouseEvent) => {
           e.preventDefault();
           toggleActive();

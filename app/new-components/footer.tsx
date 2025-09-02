@@ -1,14 +1,6 @@
 "use client";
-import { useCallback, useState } from "react";
 
 export function Footer() {
-  const [value, setValue] = useState("");
-
-  const handleChange = useCallback(
-    (newValue: string) => setValue(newValue),
-    []
-  );
-
   // lh(lineheight)
   return (
     <div className="mx-auto w-[768px] max-w-[768px]">

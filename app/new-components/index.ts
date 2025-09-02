@@ -7,3 +7,4 @@ export * from "./main-section";
 export * from "./no-phone-number-set-alert";
 export * from "./phone-number-set";
 export * from "./suggestions";
+export * from "./landing-page";

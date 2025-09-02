@@ -7,7 +7,7 @@ interface SQLQueryTableProps {
   errorMessage?: string;
 }
 
-export function SQLQueryTable({ data, errorMessage }: SQLQueryTableProps) {
+export function SQLQueryTable({ data }: SQLQueryTableProps) {
   // const t = useTranslations("text2sql.queryResult");
   const rowsPerPage = 10;
   const [page, setPage] = useState(1);

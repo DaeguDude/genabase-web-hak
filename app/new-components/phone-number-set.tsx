@@ -1,10 +1,10 @@
 "use client";
 import { Banner, BlockStack, Box, List, Popover, Text } from "@shopify/polaris";
 
-import { type TShop } from "app/type";
 import { Phone } from "lucide-react";
 
 import { useState } from "react";
+import { TShop } from "../type";
 
 export function PhoneNumberSet({ shopInfo }: { shopInfo: TShop }) {
   const [popoverActive, setPopoverActive] = useState(false);

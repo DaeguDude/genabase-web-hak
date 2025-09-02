@@ -1,12 +1,9 @@
 "use client";
 import React, { useState } from "react";
 
-import { Button, BlockStack, InlineStack, Text } from "@shopify/polaris";
+import { BlockStack, InlineStack, Text } from "@shopify/polaris";
 
-import { Tooltip } from "@heroui/react";
 import { SQLQueryTable, DataVisualization } from ".";
-
-import { ChartVerticalFilledIcon } from "@shopify/polaris-icons";
 
 interface Props {
   response: {
@@ -25,63 +22,61 @@ function getTypeStyles() {
   return "border-gray-200 text-gray-900";
 }
 
-function ToolResponseBoxComponent({ response, pinned, pinAction }: Props) {
-  const [visualizationPreference, setVisualizationPreference] = useState<
-    "table" | "chart"
-  >("table");
+function ToolResponseBoxComponent({ response }: Props) {
+  const [visualizationPreference] = useState<"table" | "chart">("table");
 
-  const createdAtDate = response.created_at
-    ? new Date(response.created_at)
-    : null;
+  // const createdAtDate = response.created_at
+  //   ? new Date(response.created_at)
+  //   : null;
 
-  const fullTimestampFormatted = createdAtDate
-    ? createdAtDate.toLocaleString(undefined, {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-      })
-    : "";
+  // const fullTimestampFormatted = createdAtDate
+  //   ? createdAtDate.toLocaleString(undefined, {
+  //       weekday: "long",
+  //       year: "numeric",
+  //       month: "long",
+  //       day: "numeric",
+  //       hour: "numeric",
+  //       minute: "2-digit",
+  //     })
+  //   : "";
 
-  const timeOnlyTimestamp = createdAtDate
-    ? createdAtDate.toLocaleString(undefined, {
-        hour: "numeric",
-        minute: "2-digit",
-      })
-    : "";
+  // const timeOnlyTimestamp = createdAtDate
+  //   ? createdAtDate.toLocaleString(undefined, {
+  //       hour: "numeric",
+  //       minute: "2-digit",
+  //     })
+  //   : "";
 
-  const canVisualizeAsChart = (
-    data: Record<string, string>[] = []
-  ): boolean => {
-    if (!data || data.length === 0) return false;
-    const columns = Object.keys(data[0]);
-    const nonChartableColumnPatterns = [
-      /id/i,
-      /phone/i,
-      /email/i,
-      /date/i,
-      /created at/i,
-      /updated at/i,
-    ];
-    for (const column of columns) {
-      if (nonChartableColumnPatterns.some((pattern) => pattern.test(column))) {
-        continue;
-      }
-      const hasNumericalValues = data.every((row) => {
-        const value = row[column];
-        return (
-          !isNaN(Number(value)) &&
-          (typeof value === "string" ? value.trim() !== "" : true)
-        );
-      });
-      if (hasNumericalValues) {
-        return true;
-      }
-    }
-    return false;
-  };
+  // const canVisualizeAsChart = (
+  //   data: Record<string, string>[] = []
+  // ): boolean => {
+  //   if (!data || data.length === 0) return false;
+  //   const columns = Object.keys(data[0]);
+  //   const nonChartableColumnPatterns = [
+  //     /id/i,
+  //     /phone/i,
+  //     /email/i,
+  //     /date/i,
+  //     /created at/i,
+  //     /updated at/i,
+  //   ];
+  //   for (const column of columns) {
+  //     if (nonChartableColumnPatterns.some((pattern) => pattern.test(column))) {
+  //       continue;
+  //     }
+  //     const hasNumericalValues = data.every((row) => {
+  //       const value = row[column];
+  //       return (
+  //         !isNaN(Number(value)) &&
+  //         (typeof value === "string" ? value.trim() !== "" : true)
+  //       );
+  //     });
+  //     if (hasNumericalValues) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // };
 
   const typeStyles = getTypeStyles();
 
