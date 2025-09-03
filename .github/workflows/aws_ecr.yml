@@ -1,0 +1,65 @@
+name: Build and Push GenaBase Web Frontend Image to Amazon ECR
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+env:
+  AWS_REGION: ap-northeast-2
+  ECR_REPOSITORY: genabase-web
+  BASE_ECR_IMAGE: 892235488448.dkr.ecr.ap-northeast-2.amazonaws.com/genabase-web
+
+permissions:
+  contents: read
+
+jobs:
+  build_and_push:
+    name: Build and Push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Determine image tag
+        id: image-tag
+        run: |
+          if [ "${{ github.event_name }}" == "release" ]; then
+              # If triggered by a release, use the release tag
+              echo "IMAGE_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          else
+              # If manually triggered, use the branch name and GitHub Run ID, replacing '/' with '-'
+              sanitized_branch_name=$(echo "${{ github.ref_name }}" | sed 's/\//-/g')
+              echo "IMAGE_TAG=${sanitized_branch_name}-${{ github.run_id }}" >> $GITHUB_ENV
+          fi
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          #IMAGE_TAG: $IMAGE_TAG
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --no-cache .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          # Retag the image with 'latest'
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+          # Push the 'latest' tag to Docker Hub
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
