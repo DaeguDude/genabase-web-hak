@@ -21,5 +21,5 @@ module "deploy" {
   container_port   = 3000
   ecr_image        = "${var.base_ecr_image}:${var.image_tag}"
   cpu_architecture = "X86_64"
-  host_header      = "genabase.staging.gena.co"
+  host_header      = "staging.genabase.com"
 }

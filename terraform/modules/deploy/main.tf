@@ -9,7 +9,7 @@ data "terraform_remote_state" "infra" {
 
 locals {
   vpc_id                      = data.terraform_remote_state.infra.outputs.vpc_id
-  alb_https_listener_arn      = data.terraform_remote_state.infra.outputs.alb_https_listener_arn
+  alb_https_listener_arn      = data.terraform_remote_state.infra.outputs.genabase_alb_https_listener_arn
   private_subnet_ids          = data.terraform_remote_state.infra.outputs.private_subnet_ids
   ecs_cluster_id              = data.terraform_remote_state.infra.outputs.ecs_cluster_id
   ecs_task_execution_role_arn = data.terraform_remote_state.infra.outputs.ecs_task_execution_role_arn
@@ -129,7 +129,7 @@ resource "aws_lb_listener_rule" "https" {
 
   condition {
     host_header {
-      values = [var.host_header, "gena.co"]
+      values = [var.host_header]
     }
   }
 }
