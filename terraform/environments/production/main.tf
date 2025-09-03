@@ -6,7 +6,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket         = "gena-terraform-state-bucket"
-    key            = "gena-web/prod/terraform.tfstate"
+    key            = "genabase-web/prod/terraform.tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
     dynamodb_table = "gena-terraform-lock-table"
@@ -15,11 +15,11 @@ terraform {
 
 module "deploy" {
   source           = "../../modules/deploy"
-  app_name         = "gena-web"
+  app_name         = "genabase-web"
   environment      = "prod"
   desired_count    = 1
   container_port   = 3000
   ecr_image        = "${var.base_ecr_image}:${var.image_tag}"
   cpu_architecture = "X86_64"
-  host_header      = "www.gena.co"
+  host_header      = "genabase.gena.co"
 }
