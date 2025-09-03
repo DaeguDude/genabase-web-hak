@@ -1,7 +1,10 @@
 import { Menu } from "lucide-react";
 import { LandingPageContainer } from "./container";
+import { useUser } from "@auth0/nextjs-auth0";
 
 export function LandingPageHeader() {
+  const { user } = useUser();
+
   return (
     <>
       {/* DESKTOP */}
@@ -9,14 +12,27 @@ export function LandingPageHeader() {
         <LandingPageContainer>
           <div className="flex justify-between">
             <div className="text-[#f14800] font-bold text-[20px]">GENABASE</div>
-            <div className="w-[225px] flex justify-between items-center ">
-              <div className="text-[#302b2b] font-medium text-[16px] leading-[133%] cursor-pointer">
-                Log In
+
+            {user ? (
+              <div className="flex items-center">
+                <a href="/auth/logout">
+                  <div className="text-[#302b2b] font-medium text-[16px] leading-[133%] cursor-pointer">
+                    Log out
+                  </div>
+                </a>
               </div>
-              <div className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[100px] bg-[#f14800] text-white cursor-pointer">
-                Join Today
+            ) : (
+              <div className="w-[225px] flex justify-between items-center ">
+                <a href="/auth/login">
+                  <div className="text-[#302b2b] font-medium text-[16px] leading-[133%] cursor-pointer">
+                    Log In
+                  </div>
+                </a>
+                <div className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[100px] bg-[#f14800] text-white cursor-pointer">
+                  Join Today
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </LandingPageContainer>
       </div>
