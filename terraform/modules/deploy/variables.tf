@@ -45,3 +45,8 @@ variable "host_header" {
   description = "Host header"
   type        = string
 }
+
+variable "auth0_arn" {
+  description = "ARN of auth0"
+  type        = string
+}

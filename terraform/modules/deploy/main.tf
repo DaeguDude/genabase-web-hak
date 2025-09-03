@@ -13,7 +13,7 @@ locals {
   private_subnet_ids          = data.terraform_remote_state.infra.outputs.private_subnet_ids
   ecs_cluster_id              = data.terraform_remote_state.infra.outputs.ecs_cluster_id
   ecs_task_execution_role_arn = data.terraform_remote_state.infra.outputs.ecs_task_execution_role_arn
-  ecs_tasks_sg_id             = data.terraform_remote_state.infra.outputs.ecs_tasks_sg_id
+  ecs_tasks_sg_id             = data.terraform_remote_state.infra.outputs.genabase_ecs_tasks_sg_id
 }
 
 resource "aws_lb_target_group" "app" {
@@ -74,8 +74,38 @@ resource "aws_ecs_task_definition" "app" {
         {
           name  = "ENVIRONMENT"
           value = var.environment
+        },
+        {
+          name  = "APP_BASE_URL"
+          value = "https://${var.host_header}"
         }
-      ],
+      ]
+      secrets = [
+        {
+          name      = "AUTH0_SECRET"
+          valueFrom = "${var.auth0_arn}:AUTH0_SECRET::"
+        },
+        {
+          name      = "AUTH0_DOMAIN"
+          valueFrom = "${var.auth0_arn}:AUTH0_DOMAIN::"
+        },
+        {
+          name      = "AUTH0_CLIENT_ID"
+          valueFrom = "${var.auth0_arn}:AUTH0_CLIENT_ID::"
+        },
+        {
+          name      = "AUTH0_CLIENT_SECRET"
+          valueFrom = "${var.auth0_arn}:AUTH0_CLIENT_SECRET::"
+        },
+        {
+          name      = "AUTH0_AUDIENCE"
+          valueFrom = "${var.auth0_arn}:AUTH0_AUDIENCE::"
+        },
+        {
+          name      = "AUTH0_SCOPE"
+          valueFrom = "${var.auth0_arn}:AUTH0_SCOPE::"
+        }
+      ]
       essential = true
       portMappings = [
         {

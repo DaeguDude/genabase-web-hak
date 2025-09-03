@@ -22,4 +22,5 @@ module "deploy" {
   ecr_image        = "${var.base_ecr_image}:${var.image_tag}"
   cpu_architecture = "X86_64"
   host_header      = "staging.genabase.com"
+  auth0_arn        = "arn:aws:secretsmanager:ap-northeast-2:892235488448:secret:staging/genabase/auth0-xcGQ7D"
 }
