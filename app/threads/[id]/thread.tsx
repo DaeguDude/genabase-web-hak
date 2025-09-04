@@ -15,7 +15,13 @@ import { Database } from "lucide-react";
 // Regex kept for potential future use when wiring real tool responses
 const jobIdRegex = /job_id:\s*([^\n]+)/;
 
-export function Thread({ id: threadId }: { id: string }) {
+export function Thread({
+  id: threadId,
+  accessToken,
+}: {
+  id: string;
+  accessToken: string;
+}) {
   const [message, setMessage] = useState("");
   const [session_id] = useSessionStorage("session_id", "");
   const [jobResults, setJobResults] = useState<Record<string, TJobResult>>({});
@@ -30,6 +36,7 @@ export function Thread({ id: threadId }: { id: string }) {
     reconnectOnMount: true,
     defaultHeaders: {
       "session-id": session_id,
+      "genabase-id": accessToken,
       environment: "staging",
     },
   });

@@ -79,7 +79,6 @@ export function Suggestions({
                 key={question}
                 content={question}
                 onClick={() => {
-                  console.log("hey?");
                   handleClickSuggestion(question);
                 }}
               />

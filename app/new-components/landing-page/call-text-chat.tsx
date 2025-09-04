@@ -19,13 +19,8 @@ export function LandingPageCallTextChat() {
       // 왼쪽 섹션의 실제 높이를 픽셀 단위로 가져오기
       // offsetHeight는 요소의 가시적인 높이(테두리 포함)를 반환
       const leftHeight = leftSectionElem.offsetHeight;
-      console.log("leftHeight: ", leftHeight);
 
       rightSectionElem.style.height = `${leftHeight * 1.3}px`;
-      console.log(
-        "rightSectionElem.style.height: ",
-        rightSectionElem.style.height
-      );
     }
 
     if (isDesktop) {
