@@ -4,6 +4,7 @@ import PersonOnThePhone from "@/public/phone.png";
 import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { ScrollReveal } from "../scroll-reveal";
+import Link from "next/link";
 
 export function LandingPageCallTextChat() {
   const isDesktop = useMediaQuery({ minWidth: 768 });
@@ -40,7 +41,7 @@ export function LandingPageCallTextChat() {
       <div className="hidden md:block bg-[#2A1F1E] py-[131px] px-[141px]">
         <ScrollReveal className="md:grid md:grid-cols-[40%_60%] gap-8">
           <div
-            className="flex flex-col gap-[32px] self-start"
+            className="flex flex-col gap-[32px] self-center"
             ref={leftSectionRef}
           >
             <div className="text-white text-[48px] leading-[100%]">
@@ -53,9 +54,12 @@ export function LandingPageCallTextChat() {
               data, send you alerts, and share up-to-date business insights.
             </div>
 
-            <button className="px-8 py-4 rounded-[8px] bg-[#8c2b02] text-[20px] font-medium text-[#FFFFFF] self-start cursor-pointer">
-              ANOTHER CTA
-            </button>
+            <Link
+              href="/auth/login"
+              className="px-8 py-4 rounded-[8px] bg-[#8c2b02] hover:bg-[#8c2b02]/90 text-[20px] font-medium text-[#FFFFFF] self-start cursor-pointer"
+            >
+              Join Today
+            </Link>
           </div>
 
           <div className="relative overflow-hidden" ref={rightSectionRef}>
@@ -78,17 +82,28 @@ export function LandingPageCallTextChat() {
         </ScrollReveal>
       </div>
 
-      <div className="md:hidden bg-[#2A1F1E] py-15 px-8">
-        <ScrollReveal className="flex flex-col gap-12 ">
-          <div className="flex flex-col gap-8">
+      <div className="md:hidden bg-[#2A1F1E]">
+        <ScrollReveal className="flex flex-col">
+          <div className="flex flex-col gap-8 px-8 pt-15 pb-12">
             <div className="text-white text-[48px] leading-[110%] font-medium">
               <span className="text-[#ff763b]">Call, text</span> and{" "}
               <span className="text-[#ff763b]">chat</span> with your database
             </div>
 
-            <button className="px-8 py-4 rounded-[8px] bg-[#8c2b02] text-[20px] font-medium text-[#FFFFFF] self-start cursor-pointer">
-              ANOTHER CTA
-            </button>
+            <div className="text-[22px] text-[#DDDDDC] leading-[100%]">
+              No more SQL. Interact with your database via APIs and mobile
+              access. Gena, your personal database assistant, will monitor your
+              data, send you alerts, and share up-to-date business insights.
+            </div>
+
+            <div className="flex">
+              <Link
+                href="/auth/login"
+                className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[8px] bg-[#f14800] hover:bg-[#ff763b] text-white cursor-pointer"
+              >
+                Join Today
+              </Link>
+            </div>
           </div>
           <div className="w-full h-auto aspect-[10/12]">
             <div

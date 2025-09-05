@@ -10,12 +10,12 @@ export function LandingPageLikeSupabase() {
           <ScrollReveal>
             <div className="pt-[80px] pb-[140px]">
               <div className="px-[77.5px] pt-[48px] pb-[32px] grid grid-cols-2 gap-[36px]">
-                <div className="flex flex-col justify-center">
+                <div className="flex items-center">
                   <div className="text-[48px] font-medium leading-[54px] text-[#731212]">
-                    Like Supabase but
-                  </div>
-                  <div className="text-[48px] font-medium leading-[54px] text-[#f14800]">
-                    eCommerce.
+                    <span className="text-[48px] font-medium leading-[54px] text-[#f14800]">
+                      Genabase{" "}
+                    </span>
+                    is a database platform for e-commerce business.
                   </div>
                 </div>
                 <div className="flex flex-col gap-[24px]">

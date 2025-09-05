@@ -1,11 +1,8 @@
 "use client";
-import { Menu } from "lucide-react";
 import { LandingPageContainer } from "./container";
-import { useUser } from "@auth0/nextjs-auth0";
+import Link from "next/link";
 
 export function LandingPageHeader() {
-  const { user } = useUser();
-
   return (
     <>
       {/* DESKTOP */}
@@ -14,36 +11,36 @@ export function LandingPageHeader() {
           <div className="flex justify-between">
             <div className="text-[#f14800] font-bold text-[20px]">GENABASE</div>
 
-            {user ? (
-              <div className="flex items-center">
-                <a href="/auth/logout">
-                  <div className="text-[#302b2b] font-medium text-[16px] leading-[133%] cursor-pointer">
-                    Log out
-                  </div>
-                </a>
-              </div>
-            ) : (
-              <div className="w-[225px] flex justify-between items-center ">
-                <a href="/auth/login">
-                  <div className="text-[#302b2b] font-medium text-[16px] leading-[133%] cursor-pointer">
-                    Log In
-                  </div>
-                </a>
-                <div className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[100px] bg-[#f14800] text-white cursor-pointer">
-                  Join Today
+            <div className="w-[225px] flex justify-between items-center ">
+              <Link href="/auth/login">
+                <div className="text-[#302b2b] font-medium text-[16px] leading-[133%] cursor-pointer">
+                  Log In
                 </div>
+              </Link>
+              <div className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[100px] bg-[#f14800] hover:bg-[#ff763b] text-white cursor-pointer">
+                Join Today
               </div>
-            )}
+            </div>
           </div>
         </LandingPageContainer>
       </div>
 
       {/* MOBILE */}
-      {/* TODO: drawer for mobile */}
-      <div className="flex md:hidden py-12 px-8  justify-between items-center">
-        <div className="text-[#f14800] font-bold text-[20px]">GENABASE</div>
-        <div>
-          <Menu className="w-8 h-8 stroke-1 text-[#84302E]" />
+      <div className="flex md:hidden py-12 px-8 justify-between items-center">
+        <div className="text-[#731212] font-bold text-[20px]">GENABASE</div>
+        <div className="flex items-center gap-8">
+          <Link
+            href="/auth/login"
+            className="font-semibold text-[16px] leading-[133%] cursor-pointer"
+          >
+            Log In
+          </Link>
+          <Link
+            href="/auth/login"
+            className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[100px] bg-[#f14800] hover:bg-[#ff763b] text-white cursor-pointer"
+          >
+            Sign Up
+          </Link>
         </div>
       </div>
     </>

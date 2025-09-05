@@ -4,10 +4,7 @@ import SchemaUrl from "./schema.png";
 import MobileGenaAI from "@/public/mobile-hero-gena-ai.gif";
 import GenaAI from "@/public/gena-ai.gif";
 
-// TODO: Implement GIF for both desktop and mobile
 export function LandingPageHero() {
-  // const photoLookSafeThreshold = useMediaQuery({ minWidth: 1200 });
-
   return (
     <>
       <div className="hidden md:block relative overflow-hidden">
@@ -18,7 +15,7 @@ export function LandingPageHero() {
               <div className="flex flex-col justify-center gap-[32px] py-2 px-4 grow">
                 <div className="flex flex-col gap-[24px]">
                   <div className="text-center font-medium text-[60px] leading-[95%] text-[#f14800]">
-                    <span className="text-[#731212]">Your</span>
+                    <span className="text-[#731212]">Your </span>
                     AI-powered eCommerce Database
                   </div>
 
@@ -30,7 +27,7 @@ export function LandingPageHero() {
                 </div>
 
                 <div className="flex justify-center">
-                  <button className="bg-[#f14800] text-white px-[28px] py-[16px] text-[20px] leading-[150%] font-medium rounded-[8px]">
+                  <button className="bg-[#f14800] hover:bg-[#ff763b] text-white px-[28px] py-[16px] text-[20px] leading-[150%] font-medium rounded-[8px] cursor-pointer">
                     Use our example on Github
                   </button>
                 </div>
@@ -56,23 +53,21 @@ export function LandingPageHero() {
         </div>
       </div>
 
-      <div className="block md:hidden px-3 pb-2.5">
+      <div className="block md:hidden px-8 pb-2.5">
         <div className="flex flex-col gap-8 py-9">
           <div className="flex flex-col gap-6">
-            <div className="text-center font-medium text-[48px] leading-[95%] text-[#f14800]">
-              <span className="text-[#731212]">Your</span>
-              AI-powered eCommerce Database
+            <div className="font-medium text-[48px] leading-[95%] text-[#731212]">
+              Your AI-powered eCommerce Database
             </div>
 
-            <div className="text-[20px] leading-[150%] font-medium text-center text-[#3a3a3a]">
-              Try out Lovable + Gena to launch your
-              <br />
-              e-commerce business in 3 hours
+            <div className="text-[20px] leading-[150%] font-medium  text-[#3a3a3a]">
+              Try out Lovable + Gena to launch your e-commerce business in 3
+              hours
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <button className="bg-[#f14800] text-white px-[28px] py-[16px] text-[20px] leading-[150%] font-medium rounded-[8px] cursor-pointer">
+          <div className="flex">
+            <button className="bg-[#f14800] hover:bg-[#ff763b] text-white px-[28px] py-[16px] text-[20px] leading-[150%] font-medium rounded-[8px] cursor-pointer">
               Use our example on Github
             </button>
           </div>
