@@ -2,7 +2,18 @@ import type { NextRequest } from "next/server";
 import { auth0 } from "./lib/auth0";
 
 export async function middleware(request: NextRequest) {
-  return await auth0.middleware(request);
+  // https://github.com/auth0/nextjs-auth0/blob/main/EXAMPLES.md#middleware-2
+  // AFAIK this refresh the token if it's expired, read the docs above for more details(250905, sh)
+  const authRes = await auth0.middleware(request);
+  const session = await auth0.getSession(request);
+
+  if (!session) {
+    return authRes;
+  }
+
+  await auth0.getAccessToken(request, authRes);
+
+  return authRes;
 }
 
 export const config = {

@@ -5,14 +5,11 @@ import { redirect } from "next/navigation";
 export default async function ThreadsPage() {
   const session = await auth0.getSession();
   const user = session?.user;
+  const accessToken = session?.tokenSet.accessToken;
 
-  if (!user) {
+  if (!user || !accessToken) {
     return redirect("/");
   }
 
-  const accessToken = await auth0.getAccessToken({
-    refresh: true,
-  });
-
-  return <Threads accessToken={accessToken.token} />;
+  return <Threads accessToken={accessToken} />;
 }

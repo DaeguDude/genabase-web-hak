@@ -12,14 +12,17 @@ export function LandingPageHeader() {
             <div className="text-[#f14800] font-bold text-[20px]">GENABASE</div>
 
             <div className="w-[225px] flex justify-between items-center ">
-              <Link href="/auth/login">
+              <Link href="/auth/login?returnTo=/threads">
                 <div className="text-[#302b2b] font-medium text-[16px] leading-[133%] cursor-pointer">
                   Log In
                 </div>
               </Link>
-              <div className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[100px] bg-[#f14800] hover:bg-[#ff763b] text-white cursor-pointer">
+              <Link
+                href="/auth/login?returnTo=/threads"
+                className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[100px] bg-[#f14800] hover:bg-[#ff763b] text-white cursor-pointer"
+              >
                 Join Today
-              </div>
+              </Link>
             </div>
           </div>
         </LandingPageContainer>
@@ -30,13 +33,13 @@ export function LandingPageHeader() {
         <div className="text-[#731212] font-bold text-[20px]">GENABASE</div>
         <div className="flex items-center gap-8">
           <Link
-            href="/auth/login"
+            href="/auth/login?returnTo=/threads"
             className="font-semibold text-[16px] leading-[133%] cursor-pointer"
           >
             Log In
           </Link>
           <Link
-            href="/auth/login"
+            href="/auth/login?returnTo=/threads"
             className="font-medium text-[16px] leading-[133%] py-3 px-6 rounded-[100px] bg-[#f14800] hover:bg-[#ff763b] text-white cursor-pointer"
           >
             Sign Up
