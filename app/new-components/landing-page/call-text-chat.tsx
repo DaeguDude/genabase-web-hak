@@ -3,6 +3,7 @@ import Image from "next/image";
 import PersonOnThePhone from "@/public/phone.png";
 import { useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
+import { ScrollReveal } from "../scroll-reveal";
 
 export function LandingPageCallTextChat() {
   const isDesktop = useMediaQuery({ minWidth: 768 });
@@ -36,66 +37,70 @@ export function LandingPageCallTextChat() {
 
   return (
     <>
-      <div className="hidden md:grid md:grid-cols-[40%_60%] bg-[#2A1F1E] py-[131px] px-[141px]  gap-8">
-        <div
-          className="flex flex-col gap-[32px] self-start"
-          ref={leftSectionRef}
-        >
-          <div className="text-white text-[48px] leading-[100%]">
-            <span className="text-[#ff763b]">Call, text</span> and{" "}
-            <span className="text-[#ff763b]">chat</span> with your database
-          </div>
-          <div className="text-[22px] text-[#dddddc]">
-            No more SQL. Interact with your database via APIs and mobile access.
-            Gena, your personal database assistant, will monitor your data, send
-            you alerts, and share up-to-date business insights.
-          </div>
-
-          <button className="px-8 py-4 rounded-[8px] bg-[#8c2b02] text-[20px] font-medium text-[#FFFFFF] self-start cursor-pointer">
-            ANOTHER CTA
-          </button>
-        </div>
-
-        <div className="relative overflow-hidden" ref={rightSectionRef}>
+      <div className="hidden md:block bg-[#2A1F1E] py-[131px] px-[141px]">
+        <ScrollReveal className="md:grid md:grid-cols-[40%_60%] gap-8">
           <div
-            style={{
-              width: "100%",
-              height: "100%",
-              backgroundImage: "url('person-on-the-phone.png')",
-              backgroundSize: "cover",
-            }}
-          ></div>
-          <div className="absolute bottom-0 right-[10%] h-[90%]">
-            <Image
-              src={PersonOnThePhone}
-              alt="chat"
-              className="h-full w-full object-cover"
-            />
+            className="flex flex-col gap-[32px] self-start"
+            ref={leftSectionRef}
+          >
+            <div className="text-white text-[48px] leading-[100%]">
+              <span className="text-[#ff763b]">Call, text</span> and{" "}
+              <span className="text-[#ff763b]">chat</span> with your database
+            </div>
+            <div className="text-[22px] text-[#dddddc]">
+              No more SQL. Interact with your database via APIs and mobile
+              access. Gena, your personal database assistant, will monitor your
+              data, send you alerts, and share up-to-date business insights.
+            </div>
+
+            <button className="px-8 py-4 rounded-[8px] bg-[#8c2b02] text-[20px] font-medium text-[#FFFFFF] self-start cursor-pointer">
+              ANOTHER CTA
+            </button>
           </div>
-        </div>
+
+          <div className="relative overflow-hidden" ref={rightSectionRef}>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundImage: "url('person-on-the-phone.png')",
+                backgroundSize: "cover",
+              }}
+            ></div>
+            <div className="absolute bottom-0 right-[10%] h-[90%]">
+              <Image
+                src={PersonOnThePhone}
+                alt="chat"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
 
-      <div className="flex flex-col gap-12 md:hidden bg-[#2A1F1E] py-15 px-8">
-        <div className="flex flex-col gap-8">
-          <div className="text-white text-[48px] leading-[110%] font-medium">
-            <span className="text-[#ff763b]">Call, text</span> and{" "}
-            <span className="text-[#ff763b]">chat</span> with your database
-          </div>
+      <div className="md:hidden bg-[#2A1F1E] py-15 px-8">
+        <ScrollReveal className="flex flex-col gap-12 ">
+          <div className="flex flex-col gap-8">
+            <div className="text-white text-[48px] leading-[110%] font-medium">
+              <span className="text-[#ff763b]">Call, text</span> and{" "}
+              <span className="text-[#ff763b]">chat</span> with your database
+            </div>
 
-          <button className="px-8 py-4 rounded-[8px] bg-[#8c2b02] text-[20px] font-medium text-[#FFFFFF] self-start cursor-pointer">
-            ANOTHER CTA
-          </button>
-        </div>
-        <div className="w-full h-auto aspect-[10/12]">
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              backgroundImage: "url('mobile-person-on-the-phone.png')",
-              backgroundSize: "cover",
-            }}
-          ></div>
-        </div>
+            <button className="px-8 py-4 rounded-[8px] bg-[#8c2b02] text-[20px] font-medium text-[#FFFFFF] self-start cursor-pointer">
+              ANOTHER CTA
+            </button>
+          </div>
+          <div className="w-full h-auto aspect-[10/12]">
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundImage: "url('mobile-person-on-the-phone.png')",
+                backgroundSize: "cover",
+              }}
+            ></div>
+          </div>
+        </ScrollReveal>
       </div>
     </>
   );
