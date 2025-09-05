@@ -8,6 +8,7 @@ export default async function ThreadPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  await fetch(`${process.env.APP_BASE_URL}/api/get-token`);
   const session = await auth0.getSession();
   const accessToken = session?.tokenSet.accessToken;
   if (!accessToken) {

@@ -3,6 +3,7 @@ import { Threads } from "./threads";
 import { redirect } from "next/navigation";
 
 export default async function ThreadsPage() {
+  await fetch(`${process.env.APP_BASE_URL}/api/get-token`);
   const session = await auth0.getSession();
   const user = session?.user;
   const accessToken = session?.tokenSet.accessToken;
