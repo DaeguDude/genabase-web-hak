@@ -1,3 +1,4 @@
+"use client";
 import { Menu } from "lucide-react";
 import { LandingPageContainer } from "./container";
 import { useUser } from "@auth0/nextjs-auth0";
