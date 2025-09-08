@@ -3,6 +3,7 @@ import { LandingPageContainer } from "./container";
 import SchemaUrl from "./schema.png";
 import MobileGenaAI from "@/public/mobile-hero-gena-ai.gif";
 import GenaAI from "@/public/gena-ai.gif";
+import GenaAI2 from "@/public/gena-ai-2.gif";
 
 export function LandingPageHero() {
   return (
@@ -12,7 +13,20 @@ export function LandingPageHero() {
           <div className="pb-[80px]">
             <div className="relative z-1 grid grid-cols-2 gap-[44px] px-[19.5px] py-[27.5px] bg-[#fffcf4]">
               {/* NOTE: MAX WIDTH TEMPORARY */}
-              <div className="flex flex-col justify-center gap-[32px] py-2 px-4 grow">
+              <div className="w-full h-auto aspect-[4/3]">
+                <div
+                  className="w-full h-full"
+                  style={{
+                    backgroundImage: "url('hero-image.png')",
+                    backgroundSize: "cover",
+                  }}
+                >
+                  <div className="py-8 px-8 rounded-lg">
+                    <Image src={GenaAI2} alt="Mobile Gena AI" />
+                  </div>
+                </div>
+              </div>
+              {/* <div className="flex flex-col justify-center gap-[32px] py-2 px-4 grow">
                 <div className="flex flex-col gap-[24px]">
                   <div className="text-center font-medium text-[60px] leading-[95%] text-[#f14800]">
                     <span className="text-[#731212]">Your </span>
@@ -31,7 +45,7 @@ export function LandingPageHero() {
                     Use our example on Github
                   </button>
                 </div>
-              </div>
+              </div> */}
               <div className="w-full h-auto aspect-[4/3]">
                 <div
                   className="w-full h-full"
